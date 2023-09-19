@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +40,16 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'employee'], function(){
 	Route::get('/view/{id}', 'EmployeesController@view');
 	Route::put('/edit/{id}', 'EmployeesController@update');
 	Route::delete('/delete/{id}', 'EmployeesController@delete');
+});
+
+
+Route::get('/helloyaska', function () {
+	$current_date_time = Carbon::now()->toDateTimeString();
+	$cookie = cookie($current_date_time);
+	return response()->json([
+		'name' => 'mohammadali',
+		'fullname' => 'ghaliany',
+		'age' => '40',
+		'currenttime' => $current_date_time
+	])->cookie($cookie);
 });
